@@ -310,17 +310,6 @@ p {
   aspect-ratio: 16 / 9;
 }
 
-.stay-favorite {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: #fff;
-  font-size: 12px;
-  font-weight: 600;
-}
-
 .stay-heart {
   position: absolute;
   top: 10px;

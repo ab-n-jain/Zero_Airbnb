@@ -1,20 +1,23 @@
 // Shape of one planner reply: always one stay, one experience and one food spot.
 // A field the content pack has no value for is null and shows as filler text.
 
+// Stay keys are the column names of the workbook's Stays sheet.
+// `type` and `art` are the only keys the workbook does not have.
 export type Stay = {
   type: "stay";
-  name: string;
-  area: string;
-  kind: string;
-  host: string;
-  pricePerNight: number;
-  total: number;
-  rating: number;
-  reviews: number;
-  guestFavorite: boolean;
-  perks: string[];
-  dates: string;
-  nights: number;
+  "Option ID": string;
+  "Listing Title": string;
+  "Property Type": string;
+  Neighbourhood: string;
+  Nights: number;
+  "Price per Night (USD)": number;
+  "Total for 2 Nights (USD)": number;
+  "Guest Rating": number;
+  "Review Count": number;
+  "Host First Name": string;
+  Highlight: string;
+  "Check-in Date": string;
+  "Check-out Date": string;
   art: string;
 };
 

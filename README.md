@@ -21,7 +21,7 @@ On a laptop the stay card sits beside the other two. On a phone the cards stack 
 
 ## Sample data
 
-The reply in `lib/sampleReply.ts` is typed by hand from one row per sheet of the "Kyoto Weekend Prototype Content Pack" workbook: stay S1, experience E1 and food spot F1.
+The reply in `lib/sampleReply.ts` is typed by hand from one row per sheet of the "Kyoto Weekend Prototype Content Pack" workbook: stay S1, experience E1 and food spot F1. The stay's fields use the Stays sheet's column names as their keys (`Listing Title`, `Neighbourhood`, `Check-in Date`, `Check-out Date`, `Price per Night (USD)`, `Highlight` and the rest).
 
 The pack has no review count for experiences and no signature dish for food spots, so those fields show filler text ("to be added"). It has no photos either, so the pictures are placeholder illustrations.
 
