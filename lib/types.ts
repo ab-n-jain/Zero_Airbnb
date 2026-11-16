@@ -1,8 +1,8 @@
 // Shape of one planner reply: always one stay, one experience and one food spot.
-// A field the content pack has no value for is null and shows as filler text.
+// Each item's keys are the column names of its sheet in the content pack
+// workbook. `type` and `art` are the only keys the workbook does not have.
+// A cell the workbook leaves blank is null and shows as filler text.
 
-// Stay keys are the column names of the workbook's Stays sheet.
-// `type` and `art` are the only keys the workbook does not have.
 export type Stay = {
   type: "stay";
   "Option ID": string;
@@ -23,30 +23,32 @@ export type Stay = {
 
 export type Experience = {
   type: "experience";
-  name: string;
-  category: string;
-  startTime: string;
-  day: string;
-  duration: string;
-  meetingPoint: string;
-  host: string | null;
-  pricePerGuest: number;
-  rating: number;
-  reviews: number | null;
-  availability: string;
+  "Option ID": string;
+  "Experience Title": string;
+  Category: string;
+  "Host First Name": string | null;
+  Date: string;
+  "Start Time": string;
+  "Duration (hours)": number;
+  "Price per Guest (USD)": number;
+  "Total for 2 Guests (USD)": number;
+  Rating: number;
+  "Meeting Point": string;
+  Availability: string;
   art: string;
 };
 
 export type Food = {
   type: "food";
-  dish: string | null;
-  place: string;
-  area: string;
-  meal: string;
-  priceBand: string;
-  cuisine: string;
-  walkFromStay: string;
-  tip: string | null;
+  "Option ID": string;
+  "Place Name": string;
+  Cuisine: string;
+  Neighbourhood: string;
+  Meal: string;
+  "Price Level": string;
+  "Est. Cost for 2 (USD)": number;
+  "Walk from Stay (min)": number;
+  "Booking Note": string | null;
   art: string;
 };
 

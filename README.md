@@ -13,17 +13,25 @@ A chat prototype. One trip request returns one stay, one experience and one food
 
 | Card | Image box | Biggest text | Accent |
 | --- | --- | --- | --- |
-| Stay | Top, full width | Stay name | Rose |
+| Stay | Top, full width | Listing title | Rose |
 | Experience | Left side | Start time | Teal |
-| Food spot | Right side, round | Signature dish | Amber |
+| Food spot | Right side, round | Cuisine | Amber |
 
 On a laptop the stay card sits beside the other two. On a phone the cards stack in the same order.
 
 ## Sample data
 
-The reply in `lib/sampleReply.ts` is typed by hand from one row per sheet of the "Kyoto Weekend Prototype Content Pack" workbook: stay S1, experience E1 and food spot F1. The stay's fields use the Stays sheet's column names as their keys (`Listing Title`, `Neighbourhood`, `Check-in Date`, `Check-out Date`, `Price per Night (USD)`, `Highlight` and the rest).
+The reply in `lib/sampleReply.ts` is typed by hand from one row per sheet of the "Kyoto Weekend Prototype Content Pack" workbook:
 
-The pack has no review count for experiences and no signature dish for food spots, so those fields show filler text ("to be added"). It has no photos either, so the pictures are placeholder illustrations.
+| Sheet | Option ID | Row |
+| --- | --- | --- |
+| Stays | S1 | Restored machiya townhouse near Gion |
+| Experiences | E1 | Tea ceremony in a 100-year-old machiya |
+| Food | F1 | Menya Inoichi |
+
+Each item's keys are its sheet's column names (`Listing Title`, `Experience Title`, `Place Name`, `Neighbourhood`, `Price per Night (USD)` and so on), and the values are the row's cells as the workbook has them. The cards format them for display, for example `2025-04-12` as "12 Apr" and `10:30` as "10:30 AM".
+
+Two keys are not workbook columns: `type` labels the card and `art` picks a placeholder illustration, because the pack has no photos. A blank cell shows as the filler text "To be added"; these three rows have no blank cells.
 
 ## Run it
 

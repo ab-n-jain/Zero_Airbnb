@@ -5,9 +5,10 @@ import type { PlanReply } from "./types";
 //   Stays       S1  Restored machiya townhouse near Gion
 //   Experiences E1  Tea ceremony in a 100-year-old machiya
 //   Food        F1  Menya Inoichi
-// The pack has no review count for experiences and no signature dish for
-// food spots, so those fields are null and the cards show filler text.
-// It also has no photos, so `art` picks a placeholder illustration.
+// Every item's keys are its sheet's column names, and the values are the
+// row's cells as the workbook has them. The pack has no photos, so `art`
+// picks a placeholder illustration. A blank cell would be null and show
+// FILLER on the card; these three rows have no blank cells.
 export const FILLER = "To be added";
 
 export const sampleReply: PlanReply = {
@@ -31,31 +32,35 @@ export const sampleReply: PlanReply = {
     "Check-out Date": "2025-04-13",
     art: "machiya",
   },
+  // Experiences sheet, row E1.
   experience: {
     type: "experience",
-    name: "Tea ceremony in a 100-year-old machiya",
-    category: "Culture",
-    startTime: "10:30 AM",
-    day: "12 Apr",
-    duration: "2 hrs",
-    meetingPoint: "Outside Gion-Shijo Station, exit 6",
-    host: "Mei",
-    pricePerGuest: 58,
-    rating: 4.96,
-    reviews: null,
-    availability: "Spots open",
+    "Option ID": "E1",
+    "Experience Title": "Tea ceremony in a 100-year-old machiya",
+    Category: "Culture",
+    "Host First Name": "Mei",
+    Date: "2025-04-12",
+    "Start Time": "10:30",
+    "Duration (hours)": 2,
+    "Price per Guest (USD)": 58,
+    "Total for 2 Guests (USD)": 116,
+    Rating: 4.96,
+    "Meeting Point": "Outside Gion-Shijo Station, exit 6",
+    Availability: "Spots open",
     art: "tea",
   },
+  // Food sheet, row F1.
   food: {
     type: "food",
-    dish: null,
-    place: "Menya Inoichi",
-    area: "Gion",
-    meal: "Dinner",
-    priceBand: "$",
-    cuisine: "Ramen",
-    walkFromStay: "8 min walk",
-    tip: "No reservations - arrive before 18:00",
+    "Option ID": "F1",
+    "Place Name": "Menya Inoichi",
+    Cuisine: "Ramen",
+    Neighbourhood: "Gion",
+    Meal: "Dinner",
+    "Price Level": "$",
+    "Est. Cost for 2 (USD)": 34,
+    "Walk from Stay (min)": 8,
+    "Booking Note": "No reservations - arrive before 18:00",
     art: "ramen",
   },
 };
