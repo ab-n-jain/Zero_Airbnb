@@ -8,7 +8,7 @@ A chat prototype. One trip request returns one stay, one experience and one food
 
 ## Moderated session checklist
 
-Rules copied from "Moderated Session Prototype Requirements: Trip-Planner Chat". A tick means the rule was run and seen to pass on that setup, and every line names the screenshot behind it.
+Rules copied from "Moderated Session Prototype Requirements: Trip-Planner Chat". A tick means the rule was run and seen to pass on that setup, and every line names what backs it: a screenshot for thirteen lines, a file for one and text for one.
 
 **How it was tested:** against the live link, https://zeroairbnb.vercel.app, in a browser window with no cookies, saved logins or storage (the same as a private or incognito window). The phone setup is an emulated iPhone 14 (390px wide, Safari user agent, touch) and the laptop setup is a 1440px window, both in Chromium. It has not been run on a real iPhone in Safari or on a MacBook in Chrome.
 
@@ -27,10 +27,10 @@ Rules copied from "Moderated Session Prototype Requirements: Trip-Planner Chat".
 | The chat is never empty at the moment of failure | ✅ | ✅ | [phone](docs/session/phone-error.png), [laptop](docs/session/laptop-error.png) | The error bubble takes the place of the dots |
 | The chat is never empty at the moment "Try again" is pressed | ✅ | ✅ | [phone](docs/session/phone-retry-thinking.png), [laptop](docs/session/laptop-retry-thinking.png) | The dots take the place of the error bubble; the guest's message stays |
 | The chat is never empty after "Try again", and the three cards come back | ✅ | ✅ | [phone](docs/session/phone-retry.png), [laptop](docs/session/laptop-retry.png) | 3 of 3 cards; the guest's message is not repeated |
-| 0 blank-chat moments across both paths | ✅ | ✅ | [blank-check.json](docs/session/blank-check.json) | 0 blank of 304 samples on the phone setup and 0 blank of 305 on the laptop setup. The check ran from 05:55:28 to 05:55:52 UTC on 2026-11-17, inside the window from 05:51:41 to 05:56:26 UTC when [`afe96c9`](https://github.com/ab-n-jain/Zero_Airbnb/commit/afe96c9) was the newest finished deployment. Full result in the table below |
+| 0 blank-chat moments across both paths | ✅ | ✅ | No screenshot. Backed by a file: [blank-check.json](docs/session/blank-check.json) | 0 blank of 304 samples on the phone setup and 0 blank of 305 on the laptop setup. The check ran from 05:55:28 to 05:55:52 UTC on 2026-11-17, inside the window from 05:51:41 to 05:56:26 UTC when [`afe96c9`](https://github.com/ab-n-jain/Zero_Airbnb/commit/afe96c9) was the newest finished deployment. Full result in the table below |
 | The page shows visible wording that the trips are sample data and nothing is booked | ✅ | ✅ | [phone](docs/session/phone-open.png), [laptop](docs/session/laptop-open.png) | "These trips are sample data for a prototype. Nothing is booked." under the message box, on every screen |
 | The failure can be triggered without editing code | ✅ | ✅ | [phone](docs/session/phone-error.png), [laptop](docs/session/laptop-error.png) | "Force failure" switch in the header, then send any message |
-| The message sharing the link says which request to type and how to trigger the failure | ✅ | ✅ | "Team message" below | The message says both and carries the production link. It still has to be posted in Slack by a person |
+| The message sharing the link says which request to type and how to trigger the failure | ✅ | ✅ | No screenshot. Backed by text: "Team message" below | The message says both and carries the production link. It still has to be posted in Slack by a person |
 
 ### Blank-chat measurement
 
@@ -68,10 +68,10 @@ Every ticked checklist line, grouped by the committed image behind it. Each row 
 | [phone-retry-thinking.png](docs/session/phone-retry-thinking.png), [laptop-retry-thinking.png](docs/session/laptop-retry-thinking.png) | Dots right after "Try again" is pressed | Chat never empty at the moment "Try again" is pressed |
 | [phone-retry.png](docs/session/phone-retry.png), [laptop-retry.png](docs/session/laptop-retry.png) | Three cards after the retry | Chat never empty after "Try again", and the three cards come back |
 
-Two ticked lines are not backed by an image:
+Two ticked lines are not backed by a screenshot:
 
-- **0 blank-chat moments across both paths** points at [blank-check.json](docs/session/blank-check.json), the measurement result. No single image can show that nothing was blank between moments; the error, retry-thinking and retry images show the three moments it covers.
-- **The message sharing the link says which request to type and how to trigger the failure** points at the "Team message" section below. There is no image because the message has not been posted yet.
+- **0 blank-chat moments across both paths** is backed by a file, not a screenshot. The file is [blank-check.json](docs/session/blank-check.json), the measurement result.
+- **The message sharing the link says which request to type and how to trigger the failure** is backed by text, not a screenshot. The text is the "Team message" section below.
 
 ## Team message
 
