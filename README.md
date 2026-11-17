@@ -55,6 +55,24 @@ Rules copied from "Moderated Session Prototype Requirements: Trip-Planner Chat".
 
 All twelve screenshots are in `docs/session/` and were taken from the live link between 05:50 and 05:51 UTC on 2026-11-17, when the newest finished deployment was [`d2b6f44`](https://github.com/ab-n-jain/Zero_Airbnb/commit/d2b6f44). Its app code is identical to [`afe96c9`](https://github.com/ab-n-jain/Zero_Airbnb/commit/afe96c9). The phone card screenshots are taller than the phone screen so all three cards fit in one image; on the device the guest scrolls the thread to see them.
 
+### Screenshot mapping
+
+Every ticked checklist line, grouped by the committed image behind it. Each row has one image from the phone setup and one from the laptop setup, all in `docs/session/`.
+
+| Image | What it shows | Checklist lines it supports |
+| --- | --- | --- |
+| [phone-open.png](docs/session/phone-open.png), [laptop-open.png](docs/session/laptop-open.png) | First load of the live link | No install, no login, no configuration; production domain loads in a private window; sample-data wording visible |
+| [phone-thinking.png](docs/session/phone-thinking.png), [laptop-thinking.png](docs/session/laptop-thinking.png) | Dots after the request is sent | Thinking state shows first |
+| [phone-cards.png](docs/session/phone-cards.png), [laptop-cards.png](docs/session/laptop-cards.png) | Three cards after the request | 3 of 3 cards show; cards look clearly different; newest deployment finished before testing; nothing cut off at phone width (phone image only) |
+| [phone-error.png](docs/session/phone-error.png), [laptop-error.png](docs/session/laptop-error.png) | Error bubble after a forced failure | Friendly message and "Try again" inside the bubble; chat never empty at the moment of failure; failure triggered without editing code; nothing cut off at phone width (phone image only) |
+| [phone-retry-thinking.png](docs/session/phone-retry-thinking.png), [laptop-retry-thinking.png](docs/session/laptop-retry-thinking.png) | Dots right after "Try again" is pressed | Chat never empty at the moment "Try again" is pressed |
+| [phone-retry.png](docs/session/phone-retry.png), [laptop-retry.png](docs/session/laptop-retry.png) | Three cards after the retry | Chat never empty after "Try again", and the three cards come back |
+
+Two ticked lines are not backed by an image:
+
+- **0 blank-chat moments across both paths** points at [blank-check.json](docs/session/blank-check.json), the measurement result. No single image can show that nothing was blank between moments; the error, retry-thinking and retry images show the three moments it covers.
+- **The message sharing the link says which request to type and how to trigger the failure** points at the "Team message" section below. There is no image because the message has not been posted yet.
+
 ## Team message
 
 To post in #search-trip-planner on Slack for Hannah Brooks, Tomás Herrera, Priya Raman and Daniel Okafor, once the production Vercel link is live and has been opened in a private window. Replace the link placeholder with the production `*.vercel.app` domain, never a preview link.
