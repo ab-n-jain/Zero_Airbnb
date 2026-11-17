@@ -1,0 +1,50 @@
+{
+  "phone": {
+    "startedAt": "2026-11-17T06:21:25.049Z",
+    "requestsSentForceFail": [
+      true,
+      false
+    ],
+    "frame1": {
+      "secondsAfterSend": 3.27,
+      "errorBubble": 1,
+      "cards": 0
+    },
+    "frame2": {
+      "secondsAfterSend": 3.682,
+      "dots": 3,
+      "errorBubble": 0,
+      "cards": 0
+    },
+    "frame3": {
+      "secondsAfterSend": 6.835,
+      "cards": 3,
+      "guestMessages": 1,
+      "errorBubble": 0
+    }
+  },
+  "laptop": {
+    "startedAt": "2026-11-17T06:21:33.781Z",
+    "requestsSentForceFail": [
+      true,
+      false
+    ],
+    "frame1": {
+      "secondsAfterSend": 3.264,
+      "errorBubble": 1,
+      "cards": 0
+    },
+    "frame2": {
+      "secondsAfterSend": 3.683,
+      "dots": 3,
+      "errorBubble": 0,
+      "cards": 0
+    },
+    "frame3": {
+      "secondsAfterSend": 6.733,
+      "cards": 3,
+      "guestMessages": 1,
+      "errorBubble": 0
+    }
+  }
+}
