@@ -16,7 +16,7 @@ export default function StayCard({ stay }: { stay: Stay }) {
   return (
     <article
       data-type={stay.type}
-      className="overflow-hidden rounded-2xl border border-line bg-white min-[720px]:row-span-2"
+      className="flex flex-col overflow-hidden rounded-2xl border border-line bg-white min-[720px]:row-span-2"
     >
       <div className="relative aspect-video [&>svg]:size-full">
         <Art name={stay.art} />
@@ -27,7 +27,7 @@ export default function StayCard({ stay }: { stay: Stay }) {
           ♡
         </span>
       </div>
-      <div className="flex flex-col gap-1.5 px-4 pt-3.5 pb-4">
+      <div className="flex flex-1 flex-col gap-1.5 px-4 pt-3.5 pb-4">
         <p className="text-[11px] font-bold tracking-[0.07em] text-stay uppercase">
           Stay · {stay.Neighbourhood}
         </p>
@@ -38,11 +38,11 @@ export default function StayCard({ stay }: { stay: Stay }) {
           {stay["Property Type"]} · Hosted by {stay["Host First Name"]}
         </p>
         <p className="text-[13px] text-muted">{stay.Highlight}</p>
-        <p className="mt-1 self-start rounded-lg bg-stay-soft px-2.5 py-1 text-[12.5px] font-semibold text-stay">
+        <p className="mt-1 self-start rounded-lg bg-stay-soft px-2.5 py-1 mb-2 text-[12.5px] font-semibold text-stay">
           {formatDates(stay["Check-in Date"], stay["Check-out Date"])} ·{" "}
           {stay.Nights} nights
         </p>
-        <div className="mt-2 flex flex-wrap justify-between gap-x-3 gap-y-1 border-t border-line pt-3 text-sm tabular-nums">
+        <div className="mt-auto flex flex-wrap justify-between gap-x-3 gap-y-1 border-t border-line pt-3 text-sm tabular-nums">
           <p>
             <strong>${stay["Price per Night (USD)"]}</strong> night
             <span className="text-muted">

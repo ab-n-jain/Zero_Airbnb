@@ -180,7 +180,7 @@ export default function Chat() {
                     <div className={`${ASSISTANT_BUBBLE} ${ASSISTANT_COLOURS}`}>
                       {turn.reply.intro}
                     </div>
-                    <div className="grid w-full grid-cols-1 gap-3 min-[720px]:grid-cols-2 min-[720px]:items-start">
+                    <div className="grid w-full grid-cols-1 gap-3 min-[720px]:grid-cols-2">
                       <StayCard stay={turn.reply.stay} />
                       <ExperienceCard experience={turn.reply.experience} />
                       <FoodCard food={turn.reply.food} />
