@@ -1,8 +1,8 @@
+**Live prototype:** https://zeroairbnb.vercel.app
+
 # Kyoto weekend planner
 
 A chat prototype. One trip request returns one stay, one experience and one food spot for a weekend in Kyoto. Sample data, no login.
-
-**Live prototype:** https://zeroairbnb.vercel.app
 
 ![Chat thread showing the stay, experience and food cards](docs/screenshot.png)
 
