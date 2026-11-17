@@ -26,7 +26,7 @@ Rules copied from "Moderated Session Prototype Requirements: Trip-Planner Chat".
 | Opening the link needs no install, no login and no configuration | ⬜ | ⬜ | The app itself has no login and needs no setup. Not ticked until the Vercel link is opened in a private window |
 | Only the production `*.vercel.app` domain is shared, and it loads in a private window without a login | ⬜ | ⬜ | Not deployed yet |
 | The newest deployment shows as finished before testing | ⬜ | ⬜ | Not deployed yet |
-| The message sharing the link says which request to type and how to trigger the failure | ⬜ | ⬜ | Both are written above; the message is not posted yet |
+| The message sharing the link says which request to type and how to trigger the failure | ⬜ | ⬜ | The message is written under "Team message" below and says both; not ticked until it is posted with the live link |
 
 ### Screenshots from the run
 
@@ -37,6 +37,22 @@ Rules copied from "Moderated Session Prototype Requirements: Trip-Planner Chat".
 | Cards after Try again | [phone-retry.png](docs/session/phone-retry.png) | [laptop-retry.png](docs/session/laptop-retry.png) |
 
 The phone card screenshots are taller than the phone screen so all three cards fit in one image; on the device the guest scrolls the thread to see them.
+
+## Team message
+
+To post in #search-trip-planner on Slack for Hannah Brooks, Tomás Herrera, Priya Raman and Daniel Okafor, once the production Vercel link is live and has been opened in a private window. Replace the link placeholder with the production `*.vercel.app` domain, never a preview link.
+
+> Hi Hannah, Tomás, Priya and Daniel. The trip-planner chat prototype is ready for Thursday's dry run (13 March), ahead of the first guest sessions on 1 April.
+>
+> Link: PRODUCTION-LINK-GOES-HERE
+>
+> It opens with no login or install, on phone and laptop. The trips are sample data and nothing is booked.
+>
+> To see the cards: type "Weekend for two near Gion, tea and great ramen" and press Send.
+>
+> To see the failure: turn on "Force failure" in the header, send any request, then press "Try again".
+>
+> Tell me here if anything looks off.
 
 ## What it does
 
