@@ -1,0 +1,73 @@
+{
+  "url": "https://zeroairbnb.vercel.app",
+  "commit": "afe96c9",
+  "testedAt": "2026-11-17T05:55:28.305Z",
+  "request": "Weekend for two near Gion, tea and great ramen",
+  "window": "new browser context for each run: no cookies, storage or logins",
+  "setups": {
+    "phone": {
+      "setup": "iPhone 14 emulated in Chromium, 390px wide",
+      "happyPath": {
+        "cardsAtEnd": 3,
+        "intervalSamples": 104,
+        "intervalBlank": 0,
+        "intervalSamplesByWhatWasShown": {
+          "thinking": 69,
+          "cards": 35
+        },
+        "threadChangesChecked": 2,
+        "threadChangesBlank": 0,
+        "sampledForMs": 3083,
+        "averageGapMs": 29.9,
+        "longestGapMs": 38.7
+      },
+      "errorPath": {
+        "cardsAtEnd": 3,
+        "intervalSamples": 200,
+        "intervalBlank": 0,
+        "intervalSamplesByWhatWasShown": {
+          "thinking": 129,
+          "errorBubble": 33,
+          "cards": 38
+        },
+        "threadChangesChecked": 4,
+        "threadChangesBlank": 0,
+        "sampledForMs": 5970,
+        "averageGapMs": 30,
+        "longestGapMs": 35.9
+      }
+    },
+    "laptop": {
+      "setup": "Chromium, 1440px wide",
+      "happyPath": {
+        "cardsAtEnd": 3,
+        "intervalSamples": 104,
+        "intervalBlank": 0,
+        "intervalSamplesByWhatWasShown": {
+          "thinking": 67,
+          "cards": 37
+        },
+        "threadChangesChecked": 2,
+        "threadChangesBlank": 0,
+        "sampledForMs": 3090,
+        "averageGapMs": 30,
+        "longestGapMs": 31.9
+      },
+      "errorPath": {
+        "cardsAtEnd": 3,
+        "intervalSamples": 201,
+        "intervalBlank": 0,
+        "intervalSamplesByWhatWasShown": {
+          "thinking": 129,
+          "errorBubble": 32,
+          "cards": 40
+        },
+        "threadChangesChecked": 4,
+        "threadChangesBlank": 0,
+        "sampledForMs": 6000,
+        "averageGapMs": 30,
+        "longestGapMs": 39.2
+      }
+    }
+  }
+}

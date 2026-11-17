@@ -27,10 +27,26 @@ Rules copied from "Moderated Session Prototype Requirements: Trip-Planner Chat".
 | The chat is never empty at the moment of failure | ✅ | ✅ | [phone](docs/session/phone-error.png), [laptop](docs/session/laptop-error.png) | The error bubble takes the place of the dots |
 | The chat is never empty at the moment "Try again" is pressed | ✅ | ✅ | [phone](docs/session/phone-retry-thinking.png), [laptop](docs/session/laptop-retry-thinking.png) | The dots take the place of the error bubble; the guest's message stays |
 | The chat is never empty after "Try again", and the three cards come back | ✅ | ✅ | [phone](docs/session/phone-retry.png), [laptop](docs/session/laptop-retry.png) | 3 of 3 cards; the guest's message is not repeated |
-| 0 blank-chat moments across both paths | ✅ | ✅ | The three rows above | 0 blank samples, checked every 30 ms: about 320 samples on the phone setup and 300 on the laptop setup |
+| 0 blank-chat moments across both paths | ✅ | ✅ | [blank-check.json](docs/session/blank-check.json) | 0 blank of 304 samples on the phone setup and 0 blank of 305 on the laptop setup, at commit [`afe96c9`](https://github.com/ab-n-jain/Zero_Airbnb/commit/afe96c9). Full result in the table below |
 | The page shows visible wording that the trips are sample data and nothing is booked | ✅ | ✅ | [phone](docs/session/phone-open.png), [laptop](docs/session/laptop-open.png) | "These trips are sample data for a prototype. Nothing is booked." under the message box, on every screen |
 | The failure can be triggered without editing code | ✅ | ✅ | [phone](docs/session/phone-error.png), [laptop](docs/session/laptop-error.png) | "Force failure" switch in the header, then send any message |
 | The message sharing the link says which request to type and how to trigger the failure | ✅ | ✅ | "Team message" below | The message says both and carries the production link. It still has to be posted in Slack by a person |
+
+### Blank-chat measurement
+
+- **Result:** 0 blank samples out of 609 across both setups and both paths.
+- **What was sampled:** the newest turn in the thread, read inside the page. A sample counts as blank when that turn shows none of the thinking dots, the error bubble or a card.
+- **When:** every 30 ms, from the moment the guest's message appears until 0.8 seconds after the three cards show. The same check also ran on every change to the thread, so a blank shorter than 30 ms would still be caught.
+- **Where and when it ran:** against https://zeroairbnb.vercel.app on 2026-11-17 at 05:55 UTC, in a fresh browser window with no cookies or logins for each run.
+- **Commit:** [`afe96c9`](https://github.com/ab-n-jain/Zero_Airbnb/commit/afe96c9), the commit `main` was at when the check ran. Vercel does not show which commit the live site is serving, so this is the repo state at test time; the app code has not changed since [`69c07dc`](https://github.com/ab-n-jain/Zero_Airbnb/commit/69c07dc).
+- **Raw result and script:** [docs/session/blank-check.json](docs/session/blank-check.json), produced by [scripts/blank-check.js](scripts/blank-check.js).
+
+| Setup | Path | Samples | Showing dots | Showing error bubble | Showing cards | Blank | Blank thread changes | Sampled for | Longest gap between samples |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Phone | Send, then cards | 104 | 69 | 0 | 35 | **0** | 0 of 2 | 3.1 s | 38.7 ms |
+| Phone | Forced failure, Try again, then cards | 200 | 129 | 33 | 38 | **0** | 0 of 4 | 6.0 s | 35.9 ms |
+| Laptop | Send, then cards | 104 | 67 | 0 | 37 | **0** | 0 of 2 | 3.1 s | 31.9 ms |
+| Laptop | Forced failure, Try again, then cards | 201 | 129 | 32 | 40 | **0** | 0 of 4 | 6.0 s | 39.2 ms |
 
 All twelve screenshots are in `docs/session/` and were taken from the live link. The phone card screenshots are taller than the phone screen so all three cards fit in one image; on the device the guest scrolls the thread to see them.
 
