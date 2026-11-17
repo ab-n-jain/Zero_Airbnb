@@ -10,15 +10,13 @@ A chat prototype. One trip request returns one stay, one experience and one food
 
 Rules copied from "Moderated Session Prototype Requirements: Trip-Planner Chat". A tick means the rule was run and seen to pass on that setup, and every line names what backs it: a screenshot for thirteen lines, a file for one and text for one.
 
-**How it was tested:** against the live link, https://zeroairbnb.vercel.app, in a browser window with no cookies, saved logins or storage (the same as a private or incognito window). The phone setup is an emulated iPhone 14 (390px wide, Safari user agent, touch) and the laptop setup is a 1440px window, both in Chromium. It has not been run on a real iPhone in Safari or on a MacBook in Chrome.
-
-**Request typed:** `Weekend for two near Gion, tea and great ramen`
+**How it was tested:** on the live link in a fresh browser window with no cookies or logins, using an emulated iPhone 14 and a 1440px laptop window in Chromium, not real devices. Typed request: `Weekend for two near Gion, tea and great ramen`. Method, timings and measurements are in [docs/testing-notes.md](docs/testing-notes.md).
 
 | Rule | Phone | Laptop | Screenshot | What was seen |
 | --- | --- | --- | --- | --- |
 | Opening the link needs no install, no login and no configuration | ✅ | ✅ | [phone](docs/session/phone-open.png), [laptop](docs/session/laptop-open.png) | The page loaded straight into the chat: no login page, no redirect, no password field, in a window with no cookies |
 | Only the production `*.vercel.app` domain is shared, and it loads in a private window without a login | ✅ | ✅ | [phone](docs/session/phone-open.png), [laptop](docs/session/laptop-open.png) | https://zeroairbnb.vercel.app is the only link in this README and in the team message |
-| The newest deployment is finished before testing | ✅ | ✅ | [phone](docs/session/phone-cards.png), [laptop](docs/session/laptop-cards.png) | Vercel reported each deployment as successful on GitHub before the test that used it: [`d2b6f44`](https://github.com/ab-n-jain/Zero_Airbnb/commit/d2b6f44) at 05:45:26 UTC for the screenshots (taken 05:50 to 05:51 UTC), and [`afe96c9`](https://github.com/ab-n-jain/Zero_Airbnb/commit/afe96c9) at 05:51:41 UTC for the blank-chat check (05:55 UTC). The Deployments tab in Vercel itself was not viewed |
+| The newest deployment is finished before testing | ✅ | ✅ | [phone](docs/session/phone-cards.png), [laptop](docs/session/laptop-cards.png) | Vercel showed each deployment finished before the test that used it. Times in [testing notes](docs/testing-notes.md#which-deployment-was-live) |
 | One typed trip request shows a thinking state first | ✅ | ✅ | [phone](docs/session/phone-thinking.png), [laptop](docs/session/laptop-thinking.png) | Three pulsing dots, input locked, no cards yet |
 | Then 3 of 3 cards show: a stay card, an Experience card and a food card | ✅ | ✅ | [phone](docs/session/phone-cards.png), [laptop](docs/session/laptop-cards.png) | 3 of 3 cards |
 | The three cards look clearly different, not one layout with the text swapped | ✅ | ✅ | [phone](docs/session/phone-cards.png), [laptop](docs/session/laptop-cards.png) | Stay: image on top, title biggest, rose. Experience: image on the left, start time biggest, teal. Food: round image on the right, cuisine biggest, amber |
@@ -27,37 +25,10 @@ Rules copied from "Moderated Session Prototype Requirements: Trip-Planner Chat".
 | The chat is never empty at the moment of failure | ✅ | ✅ | [phone](docs/session/phone-error.png), [laptop](docs/session/laptop-error.png) | The error bubble takes the place of the dots |
 | The chat is never empty at the moment "Try again" is pressed | ✅ | ✅ | [phone](docs/session/phone-retry-thinking.png), [laptop](docs/session/laptop-retry-thinking.png) | The dots take the place of the error bubble; the guest's message stays |
 | The chat is never empty after "Try again", and the three cards come back | ✅ | ✅ | [phone](docs/session/phone-retry-sequence.png), [laptop](docs/session/laptop-retry-sequence.png) | Three frames from one run in a single image: the error bubble, the dots after "Try again" is pressed, then 3 of 3 cards with the guest's message shown once |
-| 0 blank-chat moments across both paths | ✅ | ✅ | No screenshot. Backed by a file: [blank-check.json](docs/session/blank-check.json) | 0 blank of 304 samples on the phone setup and 0 blank of 305 on the laptop setup. The check ran from 05:55:28 to 05:55:52 UTC on 2026-11-17, inside the window from 05:51:41 to 05:56:26 UTC when [`afe96c9`](https://github.com/ab-n-jain/Zero_Airbnb/commit/afe96c9) was the newest finished deployment. Full result in the table below |
+| 0 blank-chat moments across both paths | ✅ | ✅ | No screenshot. Backed by a file: [blank-check.json](docs/session/blank-check.json) | 0 blank of 304 samples on the phone setup and 0 blank of 305 on the laptop setup. Method and full table in [testing notes](docs/testing-notes.md#blank-chat-measurement) |
 | The page shows visible wording that the trips are sample data and nothing is booked | ✅ | ✅ | [phone](docs/session/phone-open.png), [laptop](docs/session/laptop-open.png) | "These trips are sample data for a prototype. Nothing is booked." under the message box, on every screen |
 | The failure can be triggered without editing code | ✅ | ✅ | [phone](docs/session/phone-error.png), [laptop](docs/session/laptop-error.png) | "Force failure" switch in the header, then send any message |
 | The message sharing the link says which request to type and how to trigger the failure | ✅ | ✅ | No screenshot. Backed by text: "Team message" below | The message says both and carries the production link. It still has to be posted in Slack by a person |
-
-### Blank-chat measurement
-
-- **Result:** 0 blank samples out of 609 across both setups and both paths.
-- **What was sampled:** the newest turn in the thread, read inside the page. A sample counts as blank when that turn shows none of the thinking dots, the error bubble or a card.
-- **When:** every 30 ms, from the moment the guest's message appears until 0.8 seconds after the three cards show. The same check also ran on every change to the thread, so a blank shorter than 30 ms would still be caught.
-- **Where and when it ran:** against https://zeroairbnb.vercel.app on 2026-11-17 at 05:55 UTC, in a fresh browser window with no cookies or logins for each run.
-- **Commit that served the live site:** from 05:51:41 to 05:56:26 UTC on 2026-11-17, the newest finished deployment was [`afe96c9`](https://github.com/ab-n-jain/Zero_Airbnb/commit/afe96c9). The check ran inside that window: it started at 05:55:28 UTC and its result was written at 05:55:52 UTC. The window opens when Vercel reported the deployment of [`afe96c9`](https://github.com/ab-n-jain/Zero_Airbnb/commit/afe96c9) successful and closes when it reported the next one, [`91ec463`](https://github.com/ab-n-jain/Zero_Airbnb/commit/91ec463), successful. Both times come from the Vercel status that GitHub shows on each commit, not from the Vercel dashboard.
-- **App code in that commit:** identical to [`69c07dc`](https://github.com/ab-n-jain/Zero_Airbnb/commit/69c07dc), the commit that added this checklist and the sample-data note. The four commits from there to [`afe96c9`](https://github.com/ab-n-jain/Zero_Airbnb/commit/afe96c9) changed only `README.md` and files in `docs/`.
-- **Raw result and script:** [docs/session/blank-check.json](docs/session/blank-check.json), produced by [scripts/blank-check.js](scripts/blank-check.js).
-
-| Setup | Path | Samples | Showing dots | Showing error bubble | Showing cards | Blank | Blank thread changes | Sampled for | Longest gap between samples |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Phone | Send, then cards | 104 | 69 | 0 | 35 | **0** | 0 of 2 | 3.1 s | 38.7 ms |
-| Phone | Forced failure, Try again, then cards | 200 | 129 | 33 | 38 | **0** | 0 of 4 | 6.0 s | 35.9 ms |
-| **Phone total** | Both paths | **304** | 198 | 33 | 73 | **0** | 0 of 6 | 9.1 s | 38.7 ms |
-| Laptop | Send, then cards | 104 | 67 | 0 | 37 | **0** | 0 of 2 | 3.1 s | 31.9 ms |
-| Laptop | Forced failure, Try again, then cards | 201 | 129 | 32 | 40 | **0** | 0 of 4 | 6.0 s | 39.2 ms |
-| **Laptop total** | Both paths | **305** | 196 | 32 | 77 | **0** | 0 of 6 | 9.1 s | 39.2 ms |
-
-**About the "Blank thread changes" column:** it counts how many times the thread changed during the run, and how many of those changes left the newest turn blank. `blank-check.json` holds only these counts; it does not record what each change was. Reading the 2 changes as "the message and dots appear, then the cards replace the dots", and the 4 changes as "the message and dots appear, the error bubble replaces the dots, the dots replace the error bubble, then the cards replace the dots", is worked out from the order of the flow, not taken from the run log.
-
-All twelve images are in `docs/session/` and were taken from the live link on 2026-11-17: ten single screenshots between 05:50 and 05:51 UTC, when the newest finished deployment was [`d2b6f44`](https://github.com/ab-n-jain/Zero_Airbnb/commit/d2b6f44), and the two retry sequence images at 06:21 UTC, when it was [`c04dd96`](https://github.com/ab-n-jain/Zero_Airbnb/commit/c04dd96). The app code is identical in both and in [`afe96c9`](https://github.com/ab-n-jain/Zero_Airbnb/commit/afe96c9). The phone card screenshots are taller than the phone screen so all three cards fit in one image; on the device the guest scrolls the thread to see them.
-
-**About the retry sequence images:** a screenshot of the cards after a retry looks exactly like a screenshot of the cards after a normal request, so a single frame cannot show that a retry happened. Each sequence image therefore holds three frames from one run, with the time of each frame after Send. The captions and the header line on those two images were added outside the app; [retry-sequence.json](docs/session/retry-sequence.json) holds what the page showed at each frame and the two requests sent (`forceFail` true, then false).
-
-**About four of the single screenshots:** the cards and error-bubble images are byte-for-byte identical to the ones first taken from a local build in [`69c07dc`](https://github.com/ab-n-jain/Zero_Airbnb/commit/69c07dc), because the live site renders the same pixels. Git therefore shows them as unchanged since that commit, and the repo alone cannot show they were retaken from the live link.
 
 ### Screenshot mapping
 
