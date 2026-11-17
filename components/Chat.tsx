@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { PlanReply } from "@/lib/types";
 import { isPlanReply } from "@/lib/validateReply";
+import ErrorBubble from "./ErrorBubble";
 import ThinkingBubble from "./ThinkingBubble";
 import StayCard from "./cards/StayCard";
 import ExperienceCard from "./cards/ExperienceCard";
@@ -14,6 +15,8 @@ type Turn = {
   status: "thinking" | "done" | "failed";
   reply?: PlanReply;
 };
+
+const REQUEST_TIMEOUT_MS = 12_000;
 
 const SUGGESTIONS = [
   "Budget solo trip, I want great ramen",
@@ -38,7 +41,7 @@ export default function Chat() {
     if (!locked) inputRef.current?.focus();
   }, [locked]);
 
-  async function send(text: string) {
+  function send(text: string) {
     const message = text.trim();
     if (!message || locked) return;
 
@@ -49,13 +52,29 @@ export default function Chat() {
     // Force failure breaks one request, then switches itself off.
     const breakThisOne = forceFail;
     setForceFail(false);
+    void requestPlan(id, message, breakThisOne);
+  }
 
+  // Try again: the error bubble becomes the thinking bubble in place, and the
+  // same message is sent again without the broken answer.
+  function retry(turn: Turn) {
+    if (locked) return;
+    setTurns((prev) =>
+      prev.map((item) =>
+        item.id === turn.id ? { ...item, status: "thinking" } : item,
+      ),
+    );
+    void requestPlan(turn.id, turn.message, false);
+  }
+
+  async function requestPlan(id: number, message: string, breakThisOne: boolean) {
     let update: Partial<Turn>;
     try {
       const response = await fetch("/api/plan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message, forceFail: breakThisOne }),
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       });
       if (!response.ok) throw new Error(`Planner replied ${response.status}`);
       const data: unknown = await response.json();
@@ -63,6 +82,7 @@ export default function Chat() {
       if (!isPlanReply(data)) throw new Error("Planner answer is incomplete");
       update = { status: "done", reply: data };
     } catch {
+      // Whatever went wrong, the guest only ever sees the error bubble.
       update = { status: "failed" };
     }
     setTurns((prev) =>
@@ -128,9 +148,7 @@ export default function Chat() {
                 {turn.status === "thinking" && <ThinkingBubble />}
 
                 {turn.status === "failed" && (
-                  <div className="bubble bubble-assistant">
-                    That request didn't go through. Send it again to retry.
-                  </div>
+                  <ErrorBubble onRetry={() => retry(turn)} />
                 )}
 
                 {turn.status === "done" && turn.reply && (

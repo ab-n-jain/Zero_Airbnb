@@ -1,3 +1,9 @@
+/* Tailwind CSS: theme and utilities only. The base reset is left out so the
+   existing chat and card styles below keep their look. */
+@layer theme, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
 :root {
   --bg: #f7f5f3;
   --surface: #ffffff;
@@ -507,6 +513,7 @@ p {
   color: var(--muted);
   font: inherit;
   font-size: 13px;
+  white-space: nowrap;
   cursor: pointer;
 }
 
