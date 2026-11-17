@@ -20,6 +20,18 @@ A chat prototype. One trip request returns one stay, one experience and one food
 
 On a laptop the stay card sits beside the other two. On a phone the cards stack in the same order.
 
+## When an answer breaks
+
+A broken answer shows a friendly bubble in place of the thinking dots. Try again sends the same request without the broken answer, so the dots play and the three cards appear.
+
+The error bubble, after a forced failure:
+
+![Error bubble with the message and a Try again button](docs/screenshot-error.png)
+
+The three cards, after clicking Try again:
+
+![Stay, experience and food cards shown after a retry](docs/screenshot-retry.png)
+
 ## Sample data
 
 The reply in `lib/sampleReply.ts` is typed by hand from one row per sheet of the "Kyoto Weekend Prototype Content Pack" workbook:
