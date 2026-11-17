@@ -8,37 +8,31 @@ A chat prototype. One trip request returns one stay, one experience and one food
 
 ## Moderated session checklist
 
-Rules copied from "Moderated Session Prototype Requirements: Trip-Planner Chat". A tick means the rule was run and seen to pass on that setup.
+Rules copied from "Moderated Session Prototype Requirements: Trip-Planner Chat". A tick means the rule was run and seen to pass on that setup, and every line names the screenshot behind it.
 
-**How it was tested:** a production build of this repo running locally, in a browser window with no cookies, saved logins or storage (the same as a private or incognito window). The phone setup is an emulated iPhone 14 (390px wide, Safari user agent, touch) and the laptop setup is a 1440px window, both in Chromium. It has not yet been run on a real iPhone in Safari, on a MacBook in Chrome, or against the Vercel link.
+**How it was tested:** against the live link, https://zeroairbnb.vercel.app, in a browser window with no cookies, saved logins or storage (the same as a private or incognito window). The phone setup is an emulated iPhone 14 (390px wide, Safari user agent, touch) and the laptop setup is a 1440px window, both in Chromium. It has not been run on a real iPhone in Safari or on a MacBook in Chrome.
 
 **Request typed:** `Weekend for two near Gion, tea and great ramen`
 
-| Rule | Phone (390px) | Laptop (1440px) | What was seen |
-| --- | --- | --- | --- |
-| One typed trip request shows a thinking state first | ✅ | ✅ | Three pulsing dots, input locked, no cards yet |
-| Then 3 of 3 cards show: a stay card, an Experience card and a food card | ✅ | ✅ | 3 of 3 cards |
-| The three cards look clearly different, not one layout with the text swapped | ✅ | ✅ | Stay: image on top, title biggest, rose. Experience: image on the left, start time biggest, teal. Food: round image on the right, cuisine biggest, amber |
-| At phone width nothing is cut off and nothing needs sideways scrolling | ✅ | n/a | No element past the screen edge, no clipped text, no sideways scroll |
-| The forced failure shows a friendly message and a "Try again" button inside the assistant bubble | ✅ | ✅ | "We couldn't put your Kyoto weekend together." with the button inside the bubble |
-| The chat is never empty: at the failure, when "Try again" is pressed and after it. 0 blank-chat moments | ✅ | ✅ | 0 blank samples, checked every 30 ms across both paths (about 300 samples per setup) |
-| Pressing "Try again" brings the three cards back | ✅ | ✅ | Dots, then 3 of 3 cards; the guest's message is not repeated |
-| The page shows visible wording that the trips are sample data and nothing is booked | ✅ | ✅ | "These trips are sample data for a prototype. Nothing is booked." under the message box |
-| The failure can be triggered without editing code | ✅ | ✅ | "Force failure" switch in the header, then send any message |
-| Opening the link needs no install, no login and no configuration | ⬜ | ⬜ | The app itself has no login and needs no setup. Not ticked until the Vercel link is opened in a private window |
-| Only the production `*.vercel.app` domain is shared, and it loads in a private window without a login | ⬜ | ⬜ | Deployed at https://zeroairbnb.vercel.app. Not ticked until it has been opened in a private window on each setup |
-| The newest deployment shows as finished before testing | ⬜ | ⬜ | Check the Deployments tab in Vercel before testing the live link |
-| The message sharing the link says which request to type and how to trigger the failure | ⬜ | ⬜ | The message is written under "Team message" below and says both; not ticked until it is posted with the live link |
+| Rule | Phone | Laptop | Screenshot | What was seen |
+| --- | --- | --- | --- | --- |
+| Opening the link needs no install, no login and no configuration | ✅ | ✅ | [phone](docs/session/phone-open.png), [laptop](docs/session/laptop-open.png) | The page loaded straight into the chat: no login page, no redirect, no password field, in a window with no cookies |
+| Only the production `*.vercel.app` domain is shared, and it loads in a private window without a login | ✅ | ✅ | [phone](docs/session/phone-open.png), [laptop](docs/session/laptop-open.png) | https://zeroairbnb.vercel.app is the only link in this README and in the team message |
+| The newest deployment is the one tested | ✅ | ✅ | [phone](docs/session/phone-cards.png), [laptop](docs/session/laptop-cards.png) | The live site shows the sample-data note and the aligned cards, which are the newest app changes. I could not see the Deployments tab in Vercel itself |
+| One typed trip request shows a thinking state first | ✅ | ✅ | [phone](docs/session/phone-thinking.png), [laptop](docs/session/laptop-thinking.png) | Three pulsing dots, input locked, no cards yet |
+| Then 3 of 3 cards show: a stay card, an Experience card and a food card | ✅ | ✅ | [phone](docs/session/phone-cards.png), [laptop](docs/session/laptop-cards.png) | 3 of 3 cards |
+| The three cards look clearly different, not one layout with the text swapped | ✅ | ✅ | [phone](docs/session/phone-cards.png), [laptop](docs/session/laptop-cards.png) | Stay: image on top, title biggest, rose. Experience: image on the left, start time biggest, teal. Food: round image on the right, cuisine biggest, amber |
+| At phone width nothing is cut off and nothing needs sideways scrolling | ✅ | n/a | [phone](docs/session/phone-cards.png), [phone](docs/session/phone-error.png) | No element past the screen edge, no clipped text, no sideways scroll |
+| The forced failure shows a friendly message and a "Try again" button inside the assistant bubble | ✅ | ✅ | [phone](docs/session/phone-error.png), [laptop](docs/session/laptop-error.png) | "We couldn't put your Kyoto weekend together." with the button inside the bubble |
+| The chat is never empty at the moment of failure | ✅ | ✅ | [phone](docs/session/phone-error.png), [laptop](docs/session/laptop-error.png) | The error bubble takes the place of the dots |
+| The chat is never empty at the moment "Try again" is pressed | ✅ | ✅ | [phone](docs/session/phone-retry-thinking.png), [laptop](docs/session/laptop-retry-thinking.png) | The dots take the place of the error bubble; the guest's message stays |
+| The chat is never empty after "Try again", and the three cards come back | ✅ | ✅ | [phone](docs/session/phone-retry.png), [laptop](docs/session/laptop-retry.png) | 3 of 3 cards; the guest's message is not repeated |
+| 0 blank-chat moments across both paths | ✅ | ✅ | The three rows above | 0 blank samples, checked every 30 ms: about 320 samples on the phone setup and 300 on the laptop setup |
+| The page shows visible wording that the trips are sample data and nothing is booked | ✅ | ✅ | [phone](docs/session/phone-open.png), [laptop](docs/session/laptop-open.png) | "These trips are sample data for a prototype. Nothing is booked." under the message box, on every screen |
+| The failure can be triggered without editing code | ✅ | ✅ | [phone](docs/session/phone-error.png), [laptop](docs/session/laptop-error.png) | "Force failure" switch in the header, then send any message |
+| The message sharing the link says which request to type and how to trigger the failure | ✅ | ✅ | "Team message" below | The message says both and carries the production link. It still has to be posted in Slack by a person |
 
-### Screenshots from the run
-
-| | Phone | Laptop |
-| --- | --- | --- |
-| Three cards | [phone-cards.png](docs/session/phone-cards.png) | [laptop-cards.png](docs/session/laptop-cards.png) |
-| Error bubble | [phone-error.png](docs/session/phone-error.png) | [laptop-error.png](docs/session/laptop-error.png) |
-| Cards after Try again | [phone-retry.png](docs/session/phone-retry.png) | [laptop-retry.png](docs/session/laptop-retry.png) |
-
-The phone card screenshots are taller than the phone screen so all three cards fit in one image; on the device the guest scrolls the thread to see them.
+All twelve screenshots are in `docs/session/` and were taken from the live link. The phone card screenshots are taller than the phone screen so all three cards fit in one image; on the device the guest scrolls the thread to see them.
 
 ## Team message
 
