@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { PlanReply } from "@/lib/types";
+import { isPlanReply } from "@/lib/validateReply";
 import ThinkingBubble from "./ThinkingBubble";
 import StayCard from "./cards/StayCard";
 import ExperienceCard from "./cards/ExperienceCard";
@@ -22,6 +23,7 @@ const SUGGESTIONS = [
 export default function Chat() {
   const [turns, setTurns] = useState<Turn[]>([]);
   const [draft, setDraft] = useState("");
+  const [forceFail, setForceFail] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const nextId = useRef(1);
@@ -44,16 +46,22 @@ export default function Chat() {
     // The guest's bubble and the thinking bubble appear in the same render.
     setTurns((prev) => [...prev, { id, message, status: "thinking" }]);
     setDraft("");
+    // Force failure breaks one request, then switches itself off.
+    const breakThisOne = forceFail;
+    setForceFail(false);
 
     let update: Partial<Turn>;
     try {
       const response = await fetch("/api/plan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({ message, forceFail: breakThisOne }),
       });
       if (!response.ok) throw new Error(`Planner replied ${response.status}`);
-      update = { status: "done", reply: (await response.json()) as PlanReply };
+      const data: unknown = await response.json();
+      // A broken answer cannot become cards, so it counts as a failure.
+      if (!isPlanReply(data)) throw new Error("Planner answer is incomplete");
+      update = { status: "done", reply: data };
     } catch {
       update = { status: "failed" };
     }
@@ -72,6 +80,18 @@ export default function Chat() {
           <h1 className="header-title">Kyoto weekend planner</h1>
           <p className="header-sub">11 – 13 Apr · sample data</p>
         </div>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={forceFail}
+          className="force-switch"
+          onClick={() => setForceFail((on) => !on)}
+        >
+          <span className="force-track" aria-hidden="true">
+            <span className="force-thumb" />
+          </span>
+          Force failure
+        </button>
       </header>
 
       <main className="thread" aria-live="polite">

@@ -493,3 +493,55 @@ p {
   font-size: 12px;
   font-weight: 600;
 }
+
+/* Force failure switch (demo trigger) */
+
+.force-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  padding: 6px 4px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.force-switch:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+.force-track {
+  display: inline-flex;
+  width: 34px;
+  height: 20px;
+  padding: 2px;
+  border-radius: 999px;
+  background: var(--line);
+  transition: background 0.15s;
+}
+
+.force-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.15s;
+}
+
+.force-switch[aria-checked="true"] {
+  color: var(--ink);
+}
+
+.force-switch[aria-checked="true"] .force-track {
+  background: var(--ink);
+}
+
+.force-switch[aria-checked="true"] .force-thumb {
+  transform: translateX(14px);
+}

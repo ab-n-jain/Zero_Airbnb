@@ -9,6 +9,7 @@ A chat prototype. One trip request returns one stay, one experience and one food
 - **Chat page:** a header, a scrolling thread and a send button.
 - **Thinking state:** on send, the input and button lock and three pulsing dots show in the reply bubble until the cards arrive.
 - **Mock reply:** `POST /api/plan` waits 1.8 seconds and returns the same sample reply for any message.
+- **Forced failure:** turn on the "Force failure" switch in the header, then send any message; that one request gets a broken answer (`"forceFail": true`), and the switch turns itself off.
 - **Three cards**, each its own component with its own layout:
 
 | Card | Image box | Biggest text | Accent |
