@@ -2,6 +2,8 @@
 
 A chat prototype. One trip request returns one stay, one experience and one food spot for a weekend in Kyoto. Sample data, no login.
 
+**Live prototype:** https://zeroairbnb.vercel.app
+
 ![Chat thread showing the stay, experience and food cards](docs/screenshot.png)
 
 ## Moderated session checklist
@@ -24,8 +26,8 @@ Rules copied from "Moderated Session Prototype Requirements: Trip-Planner Chat".
 | The page shows visible wording that the trips are sample data and nothing is booked | ✅ | ✅ | "These trips are sample data for a prototype. Nothing is booked." under the message box |
 | The failure can be triggered without editing code | ✅ | ✅ | "Force failure" switch in the header, then send any message |
 | Opening the link needs no install, no login and no configuration | ⬜ | ⬜ | The app itself has no login and needs no setup. Not ticked until the Vercel link is opened in a private window |
-| Only the production `*.vercel.app` domain is shared, and it loads in a private window without a login | ⬜ | ⬜ | Not deployed yet |
-| The newest deployment shows as finished before testing | ⬜ | ⬜ | Not deployed yet |
+| Only the production `*.vercel.app` domain is shared, and it loads in a private window without a login | ⬜ | ⬜ | Deployed at https://zeroairbnb.vercel.app. Not ticked until it has been opened in a private window on each setup |
+| The newest deployment shows as finished before testing | ⬜ | ⬜ | Check the Deployments tab in Vercel before testing the live link |
 | The message sharing the link says which request to type and how to trigger the failure | ⬜ | ⬜ | The message is written under "Team message" below and says both; not ticked until it is posted with the live link |
 
 ### Screenshots from the run
@@ -44,7 +46,7 @@ To post in #search-trip-planner on Slack for Hannah Brooks, Tomás Herrera, Priy
 
 > Hi Hannah, Tomás, Priya and Daniel. The trip-planner chat prototype is ready for Thursday's dry run (13 March), ahead of the first guest sessions on 1 April.
 >
-> Link: PRODUCTION-LINK-GOES-HERE
+> Link: https://zeroairbnb.vercel.app
 >
 > It opens with no login or install, on phone and laptop. The trips are sample data and nothing is booked.
 >
