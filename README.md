@@ -45,8 +45,10 @@ Rules copied from "Moderated Session Prototype Requirements: Trip-Planner Chat".
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Phone | Send, then cards | 104 | 69 | 0 | 35 | **0** | 0 of 2 | 3.1 s | 38.7 ms |
 | Phone | Forced failure, Try again, then cards | 200 | 129 | 33 | 38 | **0** | 0 of 4 | 6.0 s | 35.9 ms |
+| **Phone total** | Both paths | **304** | 198 | 33 | 73 | **0** | 0 of 6 | 9.1 s | 38.7 ms |
 | Laptop | Send, then cards | 104 | 67 | 0 | 37 | **0** | 0 of 2 | 3.1 s | 31.9 ms |
 | Laptop | Forced failure, Try again, then cards | 201 | 129 | 32 | 40 | **0** | 0 of 4 | 6.0 s | 39.2 ms |
+| **Laptop total** | Both paths | **305** | 196 | 32 | 77 | **0** | 0 of 6 | 9.1 s | 39.2 ms |
 
 All twelve screenshots are in `docs/session/` and were taken from the live link. The phone card screenshots are taller than the phone screen so all three cards fit in one image; on the device the guest scrolls the thread to see them.
 
