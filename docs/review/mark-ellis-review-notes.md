@@ -6,6 +6,13 @@ Trip-Planner Chat Prototype for Airbnb Search, reviewed with Mark Ellis (Design 
 - **Live prototype:** https://zeroairbnb.vercel.app
 - **Code:** https://github.com/ab-n-jain/Zero_Airbnb
 
+## The bet and the target
+
+- **Our bet:** letting guests describe their trip in their own words, and showing them a whole weekend first, will keep more guests going than the search filter panel, where 62% leave before viewing a single listing.
+- **The guest sessions count as a win if** at least 4 of 5 guests reach the three cards without help and name one card they'd want to open next.
+- **Why 4 of 5:** about 38% of guests reach a listing through the filter panel today, so 80% would be a clear signal.
+- **This is our target, not a result.** Five moderated guests aren't live search traffic, so it tells us whether to build the real version, not what the drop-off will become.
+
 ## Mark's six questions
 
 ### 1. Why do the stay, Experience and food cards each have their own layout, instead of one card with a type label?
@@ -61,6 +68,8 @@ The Host Experience patterns he shared aren't in this repository, so that compar
 ## Two next steps
 
 Proposed for agreement with Mark on the call. Mark them agreed, or change them, before handing these notes on.
+
+Both depend on the guest sessions meeting the 4 of 5 target above.
 
 1. **Hook up a real API in place of the fake reply.** Change `app/api/plan/route.ts` to call a real listings and Experiences service and return the same reply shape, keeping the answer check and the error bubble as they are.
 2. **Run the full checklist on real devices before the guest sessions.** Repeat the happy path and the error path on a real iPhone in Safari and a real laptop in Chrome, both in private windows, and record the results in the README checklist.
