@@ -48,8 +48,13 @@ Then open http://localhost:3000 and send a trip request.
 
 ## Where things are
 
+All styling is Tailwind CSS. The colours, fonts and the dots animation are defined once in `app/globals.css`.
+
 - `components/Chat.tsx`: the thread, the input lock and the request
 - `components/ThinkingBubble.tsx`: the pulsing dots
+- `components/ErrorBubble.tsx`: the message and Try again button shown when an answer is broken
+- `components/bubble.ts`: the bubble shape shared by every assistant reply
 - `components/cards/`: `StayCard`, `ExperienceCard`, `FoodCard` and the placeholder art
 - `app/api/plan/route.ts`: the mock reply
 - `lib/sampleReply.ts`, `lib/types.ts`: the sample reply and its shape
+- `lib/brokenReply.ts`, `lib/validateReply.ts`: the broken answer and the check that catches it

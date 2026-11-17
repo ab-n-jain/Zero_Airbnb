@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { PlanReply } from "@/lib/types";
 import { isPlanReply } from "@/lib/validateReply";
+import { ASSISTANT_BUBBLE, ASSISTANT_COLOURS } from "./bubble";
 import ErrorBubble from "./ErrorBubble";
 import ThinkingBubble from "./ThinkingBubble";
 import StayCard from "./cards/StayCard";
@@ -17,6 +18,10 @@ type Turn = {
 };
 
 const REQUEST_TIMEOUT_MS = 12_000;
+
+// Keyboard focus outline shared by the chat's controls.
+const FOCUS =
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink";
 
 const SUGGESTIONS = [
   "Budget solo trip, I want great ramen",
@@ -91,46 +96,60 @@ export default function Chat() {
   }
 
   return (
-    <div className="app">
-      <header className="header">
-        <div className="header-mark" aria-hidden="true">
+    <div className="flex h-dvh flex-col">
+      <header className="flex items-center gap-3 border-b border-line bg-white px-5 py-3">
+        <div
+          aria-hidden="true"
+          className="grid size-9 flex-none place-items-center rounded-full bg-ink text-[17px] text-white"
+        >
           京
         </div>
         <div>
-          <h1 className="header-title">Kyoto weekend planner</h1>
-          <p className="header-sub">11 – 13 Apr · sample data</p>
+          <h1 className="text-base font-[650]">Kyoto weekend planner</h1>
+          <p className="text-[12.5px] text-muted">11 – 13 Apr · sample data</p>
         </div>
         <button
           type="button"
           role="switch"
           aria-checked={forceFail}
-          className="force-switch"
           onClick={() => setForceFail((on) => !on)}
+          className={`ml-auto inline-flex cursor-pointer items-center gap-2 rounded-lg px-1 py-1.5 text-[13px] whitespace-nowrap ${FOCUS} ${
+            forceFail ? "text-ink" : "text-muted"
+          }`}
         >
-          <span className="force-track" aria-hidden="true">
-            <span className="force-thumb" />
+          <span
+            aria-hidden="true"
+            className={`inline-flex h-5 w-[34px] rounded-full p-0.5 transition-colors ${
+              forceFail ? "bg-ink" : "bg-line"
+            }`}
+          >
+            <span
+              className={`size-4 rounded-full bg-white transition-transform ${
+                forceFail ? "translate-x-3.5" : ""
+              }`}
+            />
           </span>
           Force failure
         </button>
       </header>
 
-      <main className="thread" aria-live="polite">
-        <div className="thread-inner">
-          <div className="row row-assistant">
-            <div className="bubble bubble-assistant">
-              Tell me what kind of Kyoto weekend you want. I'll bring back one
-              stay, one experience and one place to eat.
+      <main className="flex-1 overflow-y-auto px-4 py-5" aria-live="polite">
+        <div className="mx-auto flex w-full max-w-[760px] flex-col gap-3">
+          <div className="flex">
+            <div className={`${ASSISTANT_BUBBLE} ${ASSISTANT_COLOURS}`}>
+              Tell me what kind of Kyoto weekend you want. I&apos;ll bring back
+              one stay, one experience and one place to eat.
             </div>
           </div>
 
           {turns.length === 0 && (
-            <div className="suggestions">
+            <div className="flex flex-wrap gap-2">
               {SUGGESTIONS.map((suggestion) => (
                 <button
                   key={suggestion}
                   type="button"
-                  className="chip"
                   onClick={() => send(suggestion)}
+                  className={`cursor-pointer rounded-full border border-line bg-white px-3.5 py-2 text-[13.5px] hover:border-ink ${FOCUS}`}
                 >
                   {suggestion}
                 </button>
@@ -139,12 +158,17 @@ export default function Chat() {
           )}
 
           {turns.map((turn) => (
-            <div key={turn.id} className="turn">
-              <div className="row row-guest">
-                <div className="bubble bubble-guest">{turn.message}</div>
+            <div key={turn.id} data-turn className="flex flex-col gap-3">
+              <div className="flex justify-end">
+                <div
+                  data-guest-bubble
+                  className="max-w-[min(520px,88%)] rounded-[18px] rounded-br-md bg-ink px-3.5 py-2.5 text-white"
+                >
+                  {turn.message}
+                </div>
               </div>
 
-              <div className="row row-assistant">
+              <div className="flex">
                 {turn.status === "thinking" && <ThinkingBubble />}
 
                 {turn.status === "failed" && (
@@ -152,11 +176,11 @@ export default function Chat() {
                 )}
 
                 {turn.status === "done" && turn.reply && (
-                  <div className="reply">
-                    <div className="bubble bubble-assistant">
+                  <div className="flex w-full flex-col items-start gap-3">
+                    <div className={`${ASSISTANT_BUBBLE} ${ASSISTANT_COLOURS}`}>
                       {turn.reply.intro}
                     </div>
-                    <div className="cards">
+                    <div className="grid w-full grid-cols-1 gap-3 min-[720px]:grid-cols-2 min-[720px]:items-start">
                       <StayCard stay={turn.reply.stay} />
                       <ExperienceCard experience={turn.reply.experience} />
                       <FoodCard food={turn.reply.food} />
@@ -171,16 +195,15 @@ export default function Chat() {
       </main>
 
       <form
-        className="composer"
+        className="border-t border-line bg-white px-4 pt-3 pb-4"
         onSubmit={(event) => {
           event.preventDefault();
           send(draft);
         }}
       >
-        <div className="composer-inner">
+        <div className="mx-auto flex w-full max-w-[760px] gap-2">
           <input
             ref={inputRef}
-            className="composer-input"
             type="text"
             value={draft}
             onChange={(event) => setDraft(event.target.value)}
@@ -189,11 +212,12 @@ export default function Chat() {
             }
             aria-label="Trip request"
             disabled={locked}
+            className={`min-w-0 flex-1 rounded-full border border-line bg-paper px-4 py-3 placeholder:text-muted disabled:cursor-not-allowed disabled:text-muted ${FOCUS}`}
           />
           <button
-            className="composer-send"
             type="submit"
             disabled={locked || draft.trim() === ""}
+            className={`cursor-pointer rounded-full bg-ink px-[22px] font-semibold text-white disabled:cursor-not-allowed disabled:opacity-35 ${FOCUS}`}
           >
             Send
           </button>
