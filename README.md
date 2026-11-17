@@ -79,9 +79,9 @@ Two ticked lines are not backed by a screenshot:
 
 ## Team message
 
-To post in #search-trip-planner on Slack for Hannah Brooks, Tomás Herrera, Priya Raman and Daniel Okafor, once the production Vercel link is live and has been opened in a private window. Replace the link placeholder with the production `*.vercel.app` domain, never a preview link.
+For #search-trip-planner on Slack.
 
-> Hi Hannah, Tomás, Priya and Daniel. The trip-planner chat prototype is ready for Thursday's dry run (13 March), ahead of the first guest sessions on 1 April.
+> Hi Hannah, Tomás, Priya and Daniel. The trip-planner chat prototype is ready for the dry run.
 >
 > Link: https://zeroairbnb.vercel.app
 >
@@ -89,7 +89,7 @@ To post in #search-trip-planner on Slack for Hannah Brooks, Tomás Herrera, Priy
 >
 > To see the cards: type "Weekend for two near Gion, tea and great ramen" and press Send.
 >
-> To see the failure: turn on "Force failure" in the header, send any request, then press "Try again".
+> To see the failure: turn on "Force failure" at the top right, send any request, then press "Try again". The switch fails one request, then turns itself off.
 >
 > Tell me here if anything looks off.
 
