@@ -222,6 +222,12 @@ export default function Chat() {
             Send
           </button>
         </div>
+        <p
+          data-sample-note
+          className="mx-auto mt-2 max-w-[760px] text-center text-xs text-muted"
+        >
+          These trips are sample data for a prototype. Nothing is booked.
+        </p>
       </form>
     </div>
   );
